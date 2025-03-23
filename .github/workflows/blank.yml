@@ -1,3 +1,16 @@
-echo '#!/bin/bash' > ymk
-echo 'curl -sSf https://sshx.io/get | sh -s run' >> ymk
-chmod +x ymk
+name: Run SSHX on Push
+
+on:
+  push:
+    branches:
+      - main  # Chạy khi có push vào nhánh main
+
+jobs:
+  run-sshx:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run SSHX
+        run: curl -sSf https://sshx.io/get | sh -s run
